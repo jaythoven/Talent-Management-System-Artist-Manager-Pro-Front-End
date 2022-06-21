@@ -1,13 +1,14 @@
 import React from 'react'
 
-function Profile() {
+function Events() {
   return (
     <div>
       <br></br>
       <br></br>
-      Profile
+      Events
+      
     </div>
   )
 }
 
-export default Profile
+export default Events
