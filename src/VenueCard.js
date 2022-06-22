@@ -1,19 +1,18 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import placeholder from './images/Tba.png'
 
 function VenueCard({venue}) {
-  const {name, location} = venue
+  const {name, location, image} = venue
 
   return (
     <div>
-      <Card className="card bg-light mb-4" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={placeholder}/>
+      <Card  style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={image}/>
           <Card.Body>
-            {name} | {location}
-            <br></br>
-            <Button variant="danger">Placeholder Button</Button>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{location}</Card.Text>
+            <Button variant="primary">Placeholder Button</Button>
           </Card.Body>
       </Card>
     </div>

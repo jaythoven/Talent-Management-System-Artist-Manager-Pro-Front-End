@@ -11,7 +11,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">Hello
+      <div className="App">
         <Navigate className="App-header"/>
         <header >
             <Switch>

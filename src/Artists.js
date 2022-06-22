@@ -10,8 +10,6 @@ function Artists() {
       .then(artists => setArtists(artists))
   }, [])
 
-
-
   return (
     <div className="cards">
       <br></br>
