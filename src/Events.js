@@ -3,32 +3,17 @@ import Table from 'react-bootstrap/Table'
 import EventForm from './EventForm'
 import Button from 'react-bootstrap/Button'
 
-function Events({showEvents}) {
+function Events({selectedEvents}) {
   const [events, setEvents] = useState([])
-  const [artists, setArtists] = useState([])
-  const [venues, setVenues] = useState([])
   const [isDelete, setDelete] = useState(false)
-  const [showForm, setShowForm] = useState(false);
-  const [isVenue, setIsVenue] = useState("")
-
+  const [showForm, setShowForm] = useState(false)
+  
 
   useEffect(() => {
     fetch('http://localhost:9292/shows')
       .then(res => res.json())
       .then((events) => setEvents(events))
-  }, [isDelete, isVenue])
-
-  useEffect(() => {
-    fetch('http://localhost:9292/artists')
-      .then(res => res.json())
-      .then((artists) => setArtists(artists))
-  }, [])
-
-  useEffect(() => {
-    fetch('http://localhost:9292/venues')
-      .then(res => res.json())
-      .then((venues) => setVenues(venues))
-  }, [])
+  }, [isDelete])
   
   function handleDelete (e) {
     setDelete(!isDelete)
@@ -38,22 +23,15 @@ function Events({showEvents}) {
     })
   }
 
+  function selectedEvents(filteredEvents) {
+    setEvents(filteredEvents)
+    
+  }
+
   function handleShow() {
     setShowForm((showForm) => !showForm);
   }
 
-  function showEvents(e) {
-    console.log(e.target)
-    // setIsVenue(selectedVenue)
-  }
-  // function transformArtist(artists, events) {
-  //   events.map ((event) => event.artist_id)
-  //   artists.map ((artist) => artist.id)
-  //   let artistI = event.artist_id === artist.id
-  //   return artistI.name
-  // }
-  // transformArtist(artists, events)
-  
   // function handleSubmit(e) {
   //   e.preventDefault()
 
@@ -94,19 +72,16 @@ function Events({showEvents}) {
         </thead>
           <tbody>
             {events.map((event) => 
-              <tr>
-                <td key={event.id} id={event.id} onClick={handleDelete}>🗑️</td>
+              <tr key={event.id}>
+                <td id={event.id} onClick={handleDelete}>🗑️</td>
                 <td>🖊️</td>
                 <td>{event.name}</td>
                 <td>{event.date}</td>
                 <td>{event.time}</td>
-                <td>{event.artist_id}</td>
-                <td>{event.venue_id}</td>
+                <td>{event.artist.name}</td>
+                <td>{event.venue.name}</td>
               </tr>
             )}
-            {/* {artists.map((artist) =>
-                <td>{artist.name}</td>
-            )} */}
           </tbody>
         </Table>
     </div>

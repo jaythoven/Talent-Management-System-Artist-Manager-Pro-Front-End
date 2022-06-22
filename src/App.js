@@ -7,7 +7,7 @@ import Events from './Events';
 import Artists from './Artists';
 
 
-function App({showEvents}) {
+function App({selectedEvents}) {
 
   return (
     <Router>
@@ -19,10 +19,10 @@ function App({showEvents}) {
                 <Artists />
               </Route>
               <Route exact path="/venues">
-                <Venues showEvents={showEvents} />
+                <Venues selectedEvents={selectedEvents}/>
               </Route>
               <Route exact path="/events">
-                <Events showEvents={showEvents}/>
+                <Events selectedEvents={selectedEvents}/>
               </Route>
             </Switch>
         </header>

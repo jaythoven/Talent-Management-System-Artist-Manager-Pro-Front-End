@@ -37,7 +37,7 @@ function EventForm() {
           name="time"
           value={formData.time}
           // onChange={handleChange}
-          placeholder="Time"
+          placeholder="Time: HH:MM AM/PM"
           className="input-text"
         />
         <br />
