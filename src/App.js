@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from './Home';
+import Venues from './Venues';
 import Navigate from './Navigate';
 import Events from './Events';
-import Profile from './Profile';
+import Artists from './Artists';
 
 
 function App() {
@@ -15,11 +15,11 @@ function App() {
         <Navigate className="App-header"/>
         <header >
             <Switch>
-              <Route exact path="/">
-                <Home />
+              <Route exact path="/artists">
+                <Artists />
               </Route>
-              <Route exact path="/profile">
-                <Profile />
+              <Route exact path="/venues">
+                <Venues />
               </Route>
               <Route exact path="/events">
                 <Events />

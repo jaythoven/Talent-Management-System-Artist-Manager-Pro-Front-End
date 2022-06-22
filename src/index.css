@@ -24,3 +24,67 @@ code {
   position: fixed; 
   top: 0;
 }
+
+.logo img{
+  width: 50px;
+}
+
+.nav-link:hover{
+  background-color: lightgray;
+  border-radius: 5px;
+  text-decoration:none;
+}
+
+.nav_link {
+  text-decoration: none;
+}
+
+.cards {
+  list-style: none;
+  background-color: #c6e0ff;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  align-tracks: center;
+}
+
+.card {
+  margin: 1rem;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card button {
+  margin-top: 0.5rem;
+}
+
+.canvasbord {
+  border: black;
+  border-width: 150px;
+}
+
+@media (min-width: 768px) {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .card {
+    width: calc(33% - 2rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    width: calc(25% - 2rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    width: calc(20% - 2rem);
+  }
+}
