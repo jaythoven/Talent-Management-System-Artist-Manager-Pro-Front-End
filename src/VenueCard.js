@@ -12,7 +12,7 @@ function VenueCard({venue}) {
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>{location}</Card.Text>
-            <Button variant="primary">Placeholder Button</Button>
+            <Button variant="primary">Show Events</Button>
           </Card.Body>
       </Card>
     </div>

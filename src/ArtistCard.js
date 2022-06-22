@@ -11,7 +11,7 @@ function ArtistCard({artist}) {
         <Card.Img variant="top" src={image}/>
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Button variant="primary">Placeholder Button</Button>
+            <Button variant="primary">Show Events</Button>
           </Card.Body>
       </Card>
     </div>

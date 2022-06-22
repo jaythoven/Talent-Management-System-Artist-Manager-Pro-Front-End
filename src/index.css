@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.buttonContainer {
+  text-align: center;
+  padding: 1rem;
+}
+
 .navbar{
   width: 100%;
   max-height: 19vh;
