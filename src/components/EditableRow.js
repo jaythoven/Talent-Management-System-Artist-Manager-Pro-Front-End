@@ -8,8 +8,8 @@ function EditableRow({handleChange, editFormData, handleCancel}) {
         <input
           type='text'
           required='required'
-          name='name'
-          value={editFormData.name}
+          name='event_name'
+          value={editFormData.event_name}
           onChange={handleChange}
           placeholder='Event Name'
           className='input-text'

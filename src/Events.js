@@ -4,6 +4,7 @@ import EventForm from './EventForm'
 import Button from 'react-bootstrap/Button'
 import EditableRow from './components/EditableRow'
 import ReadOnlyRow from './components/ReadOnlyRow'
+import {nanoid} from 'nanoid'
 
 function Events({events, handleDelete, setEvents}) {
   const [showForm, setShowForm] = useState(false)
@@ -23,16 +24,17 @@ function Events({events, handleDelete, setEvents}) {
   }
 
   function handleEdit(e, event) {
+    console.log(e.target.id)
     setEditEventId(parseInt(e.target.id))
     console.log(event)
     console.log(parseInt(e.target.id))
     const formValues = {
-      "name": event.name,
+      "event_name": event.event_name,
       "date": event.date,
       "time": event.time,
-      "artist": event.artist.name,  
+      "artist": event.artist.artist_name,  
       "artist_id": event.artist_id,
-      "venue": event.venue.name,
+      "venue": event.venue.venue_name,
       "venue_id": event.venue_id
     }
     console.log(formValues)
@@ -41,28 +43,37 @@ function Events({events, handleDelete, setEvents}) {
 
   function handleEditSubmit(e) {
     e.preventDefault()
-    const editedEvent = {
-      name: editFormData.name,
-      date: editFormData.date,
-      time: editFormData.time,
-      artist: editFormData.artist,
-      artist_id: editFormData.artist_id,
-      venue: editFormData.venue,
-      venue_id: editFormData.venue_id
-    }
-    // const updatedEvent = [...events]
-    // console.log(updatedEvent)
-
-    fetch(`http://localhost:9292/shows/${editEventId}`, {
+    // const editedEvent = {
+    //   name: editFormData.event_name,
+    //   date: editFormData.date,
+    //   time: editFormData.time,
+    //   artist: editFormData.artist,
+    //   artist_id: editFormData.artist_id,
+    //   venue: editFormData.venue,
+    //   venue_id: editFormData.venue_id
+    // }
+   
+    console.log(editEventId)
+    fetch(`http://localhost:9292/events/${editEventId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "Accepts": "application/json"
       },
-      body: JSON.stringify(editedEvent)
+      body: JSON.stringify({
+        // editedEvent
+        event_name: editFormData.event_name,
+        date: editFormData.date,
+        time: editFormData.time,
+        artist: editFormData.artist,
+        artist_id: editFormData.artist_id,
+        venue: editFormData.venue,
+        venue_id: editFormData.venue_id
+      })
     })
     .then((res) => res.json())
     .then(handleUpdateEvent)
+    // .then(data => console.log(data))
 
     setEditEventId(null)
   }
@@ -78,8 +89,6 @@ function Events({events, handleDelete, setEvents}) {
     const {name, value} = e.target
     setEditFormData({...editFormData,
       [name]: value})
-      console.log(name,value)
-      console.log(editFormData)
   }
 
   function handleCancel() {

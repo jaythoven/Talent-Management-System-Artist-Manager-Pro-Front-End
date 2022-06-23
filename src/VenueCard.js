@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import {useHistory} from 'react-router-dom'
 
 function VenueCard({venue, events, selectedVenue}) {
-  const {name, location, image, id} = venue
+  const {venue_name, location, image, id} = venue
   const history = useHistory()
 
   function routeChange(e) {
@@ -18,7 +18,7 @@ function VenueCard({venue, events, selectedVenue}) {
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={image}/>
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
+            <Card.Title>{venue_name}</Card.Title>
             <Card.Text>{location}</Card.Text>
               <Button 
                 id={id} 

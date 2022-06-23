@@ -12,7 +12,7 @@ function App({selectedVenue}) {
   const [isDelete, setDelete] = useState(false)
 
   useEffect(() => {
-    fetch('http://localhost:9292/shows')
+    fetch('http://localhost:9292/events')
       .then(res => res.json())
       .then((events) => setEvents(events))
   }, [isDelete])
@@ -20,7 +20,7 @@ function App({selectedVenue}) {
   function handleDelete (e) {
     setDelete(!isDelete)
     let id = e.target.id
-    fetch(`http://localhost:9292/shows/${id}`, {
+    fetch(`http://localhost:9292/events/${id}`, {
       method: 'DELETE',
     })
   }

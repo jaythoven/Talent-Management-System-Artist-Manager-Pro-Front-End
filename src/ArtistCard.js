@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 
 
 function ArtistCard({artist, selectedArtist}) {
-  const {name, image, id} = artist
+  const {artist_name, image, id} = artist
   const history = useHistory()
 
   function routeChange(e) {
@@ -19,7 +19,7 @@ function ArtistCard({artist, selectedArtist}) {
       <Card  style={{ width: '18rem' }}>
         <Card.Img variant="top" src={image}/>
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
+            <Card.Title>{artist_name}</Card.Title>
             <Button 
               id={id} 
               variant="primary"
