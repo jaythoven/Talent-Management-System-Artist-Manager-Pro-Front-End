@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ArtistCard from './ArtistCard'
 
-function Artists() {
+function Artists({selectedArtist}) {
   const [artists, setArtists] = useState([])
 
   useEffect(() => {
@@ -14,7 +14,13 @@ function Artists() {
     <div className="cards">
       <br></br>
       <br></br>
-      {artists.map((artist) => <ArtistCard key={artist.id} artist={artist}/>)}
+        {artists.map((artist) => 
+          <ArtistCard 
+            selectedArtist={selectedArtist}
+            key={artist.id} 
+            artist={artist}
+          />
+        )}
     </div>
   )
 }

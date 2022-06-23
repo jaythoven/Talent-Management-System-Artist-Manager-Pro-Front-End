@@ -3,30 +3,9 @@ import Table from 'react-bootstrap/Table'
 import EventForm from './EventForm'
 import Button from 'react-bootstrap/Button'
 
-function Events({selectedEvents}) {
-  const [events, setEvents] = useState([])
-  const [isDelete, setDelete] = useState(false)
+function Events({events, handleDelete, setEvents}) {
   const [showForm, setShowForm] = useState(false)
-  
-
-  useEffect(() => {
-    fetch('http://localhost:9292/shows')
-      .then(res => res.json())
-      .then((events) => setEvents(events))
-  }, [isDelete])
-  
-  function handleDelete (e) {
-    setDelete(!isDelete)
-    let id = e.target.id
-    fetch(`http://localhost:9292/shows/${id}`, {
-      method: 'DELETE',
-    })
-  }
-
-  function selectedEvents(filteredEvents) {
-    setEvents(filteredEvents)
-    
-  }
+ 
 
   function handleShow() {
     setShowForm((showForm) => !showForm);
@@ -50,10 +29,15 @@ function Events({selectedEvents}) {
   //       "image": "",
   //     })
   //   }
+  
   return (
     <div>
       <br></br>
-      {showForm ? <EventForm events={events} setEvents={setEvents}/> : null}
+      {showForm ? 
+        <EventForm events={events} 
+        setEvents={setEvents}
+        /> : null
+      }
         <div className="buttonContainer">
           <Button onClick={handleShow} variant="primary" >Create New Event</Button>
         </div>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import VenueCard from './VenueCard'
 
-function Venues({selectedEvents}) {
+function Venues({selectedVenue, events}) {
   const [venues, setVenues] = useState([])
 
   useEffect(() => {
@@ -10,12 +10,18 @@ function Venues({selectedEvents}) {
       .then(venues => setVenues(venues))
   }, [])
 
-
   return (
     <div className="cards">
       <br></br>
       <br></br>      
-          {venues.map((venue) => <VenueCard selectedEvents={selectedEvents} key={venue.id} venue={venue}/>)}
+          {venues.map((venue) => 
+            <VenueCard 
+              selectedVenue={selectedVenue} 
+              key={venue.id} 
+              venue={venue}
+              events={events}
+            />
+          )}
     </div>
   )
 }

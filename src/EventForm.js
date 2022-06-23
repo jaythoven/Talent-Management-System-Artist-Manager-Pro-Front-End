@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function EventForm() {
+function EventForm({setEvents}) {
   const [formData, setFormData] = useState({
     "name": "",
     "date": "",
@@ -9,10 +9,9 @@ function EventForm() {
     "artist": "",
   })
 
-
   return (
     <div className="container">
-      <form className="add-toy-form">
+      <form className="add-toy-form small">
         <h4>Add New Event</h4>
         <input
           type="text"

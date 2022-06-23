@@ -1,9 +1,18 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import {useHistory} from 'react-router-dom'
 
-function ArtistCard({artist}) {
-  const {name, image} = artist
+
+function ArtistCard({artist, selectedArtist}) {
+  const {name, image, id} = artist
+  const history = useHistory()
+
+  function routeChange(e) {
+    let path = '/events'
+    history.push(path)
+    selectedArtist(e)
+  }
 
   return (
     <div>
@@ -11,7 +20,13 @@ function ArtistCard({artist}) {
         <Card.Img variant="top" src={image}/>
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Button variant="primary">Show Events</Button>
+            <Button 
+              id={id} 
+              variant="primary"
+              onClick={routeChange}
+            >
+                Show Events
+            </Button>
           </Card.Body>
       </Card>
     </div>

@@ -3,21 +3,14 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {useHistory} from 'react-router-dom'
 
-function VenueCard({venue, selectedEvents}) {
-  const {name, location, image, id, shows} = venue
+function VenueCard({venue, events, selectedVenue}) {
+  const {name, location, image, id} = venue
   const history = useHistory()
 
-  // function showEvents(e) {
-  //   let id = e.target.id
-  //   setEvents(selectedEvents)
-  // }
-  console.log(venue.shows)
   function routeChange(e) {
     let path = '/events'
     history.push(path)
-    let filteredEvents = shows.filter((show) => e.target.id === show.venue_id)
-    console.log(filteredEvents)
-    selectedEvents(filteredEvents)
+    selectedVenue(e)
   }
 
   return (

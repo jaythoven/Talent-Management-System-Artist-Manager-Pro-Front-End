@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.small {
+  font-size: 14px;
+}
+
 .buttonContainer {
   text-align: center;
   padding: 1rem;
