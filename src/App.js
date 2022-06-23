@@ -57,6 +57,7 @@ function App({selectedVenue}) {
                   events= {events}
                   handleDelete={handleDelete}
                   setEvents={setEvents}
+                  // handleUpdateEvent={handleUpdateEvent}
                 />
               </Route>
             </Switch>

@@ -12,8 +12,10 @@ function Events({events, handleDelete, setEvents}) {
     "name": "",
     "date": "",
     "time": "",
+    "artist": "",
+    "artist_id": "",
     "venue": "",
-    "artist": "",    
+    "venue_id": ""
   })
 
   function handleShow() {
@@ -22,30 +24,35 @@ function Events({events, handleDelete, setEvents}) {
 
   function handleEdit(e, event) {
     setEditEventId(parseInt(e.target.id))
+    console.log(event)
     console.log(parseInt(e.target.id))
     const formValues = {
       "name": event.name,
       "date": event.date,
       "time": event.time,
+      "artist": event.artist.name,  
+      "artist_id": event.artist_id,
       "venue": event.venue.name,
-      "artist": event.artist.name  
+      "venue_id": event.venue_id
     }
+    console.log(formValues)
     setEditFormData(formValues)
   }
 
   function handleEditSubmit(e) {
     e.preventDefault()
-    console.log(e.target)
     const editedEvent = {
       name: editFormData.name,
       date: editFormData.date,
       time: editFormData.time,
+      artist: editFormData.artist,
+      artist_id: editFormData.artist_id,
       venue: editFormData.venue,
-      artist: editFormData.artist
+      venue_id: editFormData.venue_id
     }
-    const updatedEvent = [...events]
-    console.log(typeof editedEvent)
-    console.log(updatedEvent)
+    // const updatedEvent = [...events]
+    // console.log(updatedEvent)
+
     fetch(`http://localhost:9292/shows/${editEventId}`, {
       method: "PATCH",
       headers: {
@@ -54,8 +61,16 @@ function Events({events, handleDelete, setEvents}) {
       },
       body: JSON.stringify(editedEvent)
     })
-      .then((res) => res.json())
-      .then((events) => setEvents(events))
+    .then((res) => res.json())
+    .then(handleUpdateEvent)
+
+    setEditEventId(null)
+  }
+  
+  function handleUpdateEvent(editedEvent) {
+    const updatedEvents = events.map((event) => event.id === editEventId ? editedEvent : event)
+    setEvents(updatedEvents)
+    // setEvents(updatedEvents)
   }
 
   function handleChange(e) {
@@ -63,25 +78,13 @@ function Events({events, handleDelete, setEvents}) {
     const {name, value} = e.target
     setEditFormData({...editFormData,
       [name]: value})
+      console.log(name,value)
+      console.log(editFormData)
   }
-  // function handleSubmit(e) {
-  //   e.preventDefault()
 
-  //   fetch('http://localhost:3001/toys', {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accepts': 'application/json'
-  //     },
-  //     body: JSON.stringify(formData)
-  //     })
-  //     .then(res=>res.json())
-  //     .then(newToy => setToys([...toys, newToy]))
-  //     setFormData({
-  //       "name": "",
-  //       "image": "",
-  //     })
-  //   }
+  function handleCancel() {
+    setEditEventId(null)
+  }
 
   return (
     <div>
@@ -96,7 +99,7 @@ function Events({events, handleDelete, setEvents}) {
           <Button onClick={handleShow} variant="primary" >Create New Event</Button>
         </div>
       <br></br>
-      <form  onSubmit={handleEditSubmit}>
+      <form onSubmit={(e) => handleEditSubmit(e)}>
         <Table responsive="sm">
           <thead>
           <tr>
@@ -104,21 +107,21 @@ function Events({events, handleDelete, setEvents}) {
             <th>Date</th>
             <th>Time</th>
             <th>Artist</th>
+            <th>Artist ID</th>
             <th>Venue</th>
+            <th>Venue ID</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
           </thead>
             <tbody>
             {events.map((event) => (
-                  //this section is new********************************
                 <Fragment>
                   {editEventId === event.id ? (
                     <EditableRow 
-                      event={event}
                       handleChange={handleChange}
                       editFormData={editFormData}
-                      handleEditSubmit={handleEditSubmit}
+                      handleCancel={handleCancel}
                     />
                   ) : (
                     <ReadOnlyRow 
@@ -128,18 +131,7 @@ function Events({events, handleDelete, setEvents}) {
                     />
                   )}
                 </Fragment>
-              )
-              //below is original******************************** 
-                // <tr key={event.id}>
-                //   <td id={event.id} onClick={handleDelete}>🗑️</td>
-                //   <td>🖊️</td>
-                //   <td>{event.name}</td>
-                //   <td>{event.date}</td>
-                //   <td>{event.time}</td>
-                //   <td>{event.artist.name}</td>
-                //   <td>{event.venue.name}</td>
-                // </tr>
-                )}
+            ))}
           </tbody>
         </Table>
       </form>

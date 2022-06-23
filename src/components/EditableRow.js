@@ -1,13 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-function EditableRow({handleChange, event, handleEditSubmit, editFormData}) {
-  // const [formData, setFormData] = useState({
-  //   "name": "",
-  //   "date": "",
-  //   "time": "",
-  //   "venue": "",
-  //   "artist": "",
-  // })
+function EditableRow({handleChange, editFormData, handleCancel}) {
 
   return (
     <tr>
@@ -54,6 +47,16 @@ function EditableRow({handleChange, event, handleEditSubmit, editFormData}) {
       <td>
         <input
           type="text"
+          name="artist_id"
+          value={editFormData.artist_id}
+          onChange={handleChange}
+          placeholder="Artist ID"
+          className="input-text"
+        ></input>
+      </td>
+      <td>
+        <input
+          type="text"
           name="venue"
           value={editFormData.venue}
           onChange={handleChange}
@@ -62,8 +65,18 @@ function EditableRow({handleChange, event, handleEditSubmit, editFormData}) {
         ></input>
       </td>
       <td>
+        <input
+          type="text"
+          name="venue_id"
+          value={editFormData.venue_id}
+          onChange={handleChange}
+          placeholder="Venue ID"
+          className="input-text"
+        ></input>
+      </td>
+      <td>
         <button type ="submit">Save</button>
-        <button type ="button">Cancel</button>
+        <button type ="button" onClick={handleCancel}>Cancel</button>
       </td>
     </tr>
   )
