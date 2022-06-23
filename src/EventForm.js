@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function EventForm({setEvents}) {
+function EventForm({events, setEvents}) {
   const [formData, setFormData] = useState({
     "name": "",
     "date": "",
