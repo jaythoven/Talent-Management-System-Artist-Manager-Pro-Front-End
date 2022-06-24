@@ -1,22 +1,24 @@
 import React from 'react'
 
-function EditableRow({handleChange, editFormData, handleCancel}) {
+function EditableRow({event,handleChange, editFormData, handleCancel}) {
 
   return (
     <tr>
       <td>
-        <input
+        {/* <input
           type='text'
           required='required'
-          name='event_name'
-          value={editFormData.event_name}
-          onChange={handleChange}
+          name='event_name' */}
+          {/* value= */}
+          {event.event_name}
+          {/* onChange={handleChange}
           placeholder='Event Name'
           className='input-text'
-        ></input>
+        ></input> */}
       </td>
       <td>
-        <input type="text"
+        <input 
+        type="text"
         name="date"
         value={editFormData.date}
         onChange={handleChange}
@@ -35,44 +37,46 @@ function EditableRow({handleChange, editFormData, handleCancel}) {
         ></input>
       </td>
       <td>
-        <input
+        {/* <label
           type="text"
           name="artist"
-          value={editFormData.artist}
-          onChange={handleChange}
+          value= */}
+          {event.artist.artist_name}
+          {/* onChange={handleChange}
           placeholder="Artist"
           className="input-text"
-        ></input>
+        ></label> */}
       </td>
       <td>
-        <input
+        {/* <input
           type="text"
           name="artist_id"
           value={editFormData.artist_id}
           onChange={handleChange}
           placeholder="Artist ID"
           className="input-text"
-        ></input>
+        ></input> */}
       </td>
       <td>
-        <input
+        {/* <input
           type="text"
           name="venue"
-          value={editFormData.venue}
-          onChange={handleChange}
-          placeholder="Venue"
-          className="input-text"
-        ></input>
+          value= */}
+          {event.venue.venue_name}
+        {/* //   onChange={handleChange}
+        //   placeholder="Venue"
+        //   className="input-text"
+        // ></input> */}
       </td>
       <td>
-        <input
+        {/* <input
           type="text"
           name="venue_id"
           value={editFormData.venue_id}
           onChange={handleChange}
           placeholder="Venue ID"
           className="input-text"
-        ></input>
+        ></input> */}
       </td>
       <td>
         <button type ="submit">Save</button>

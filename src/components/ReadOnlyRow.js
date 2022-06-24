@@ -2,6 +2,7 @@ import React from 'react'
 
 function ReadOnlyRow({event, handleDelete, handleEdit}) {
 
+
   return (
     <tr key={event.id}>
       <td>{event.event_name}</td>

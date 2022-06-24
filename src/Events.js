@@ -4,19 +4,19 @@ import EventForm from './EventForm'
 import Button from 'react-bootstrap/Button'
 import EditableRow from './components/EditableRow'
 import ReadOnlyRow from './components/ReadOnlyRow'
-import {nanoid} from 'nanoid'
 
-function Events({events, handleDelete, setEvents}) {
+
+function Events({isUpdate, setIsUpdate, events, handleDelete, setEvents}) {
   const [showForm, setShowForm] = useState(false)
   const [editEventId, setEditEventId] = useState(null)
   const [editFormData, setEditFormData] = useState({
-    "name": "",
+    // "name": "",
     "date": "",
     "time": "",
     "artist": "",
     "artist_id": "",
-    "venue": "",
-    "venue_id": ""
+    // "venue": "",
+    // "venue_id": ""
   })
 
   function handleShow() {
@@ -29,13 +29,13 @@ function Events({events, handleDelete, setEvents}) {
     console.log(event)
     console.log(parseInt(e.target.id))
     const formValues = {
-      "event_name": event.event_name,
+      // "event_name": event.event_name,
       "date": event.date,
       "time": event.time,
-      "artist": event.artist.artist_name,  
+      "artist": event.artist,  
       "artist_id": event.artist_id,
-      "venue": event.venue.venue_name,
-      "venue_id": event.venue_id
+      // "venue": event.venue.venue_name,
+      // "venue_id": event.venue_id
     }
     console.log(formValues)
     setEditFormData(formValues)
@@ -43,45 +43,36 @@ function Events({events, handleDelete, setEvents}) {
 
   function handleEditSubmit(e) {
     e.preventDefault()
-    // const editedEvent = {
-    //   name: editFormData.event_name,
-    //   date: editFormData.date,
-    //   time: editFormData.time,
-    //   artist: editFormData.artist,
-    //   artist_id: editFormData.artist_id,
-    //   venue: editFormData.venue,
-    //   venue_id: editFormData.venue_id
-    // }
-   
-    console.log(editEventId)
-    fetch(`http://localhost:9292/events/${editEventId}`, {
+    console.log(editFormData.date, editFormData.time, editFormData.artist)
+  
+   fetch(`http://localhost:9292/events/${editEventId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "Accepts": "application/json"
       },
       body: JSON.stringify({
-        // editedEvent
-        event_name: editFormData.event_name,
-        date: editFormData.date,
+        // 
+        // event_name: editFormData.event_name,
         time: editFormData.time,
+        date: editFormData.date,
         artist: editFormData.artist,
-        artist_id: editFormData.artist_id,
-        venue: editFormData.venue,
-        venue_id: editFormData.venue_id
+        // artist_id: editFormData.artist_id,
+        // venue: editFormData.venue,
+        // venue_id: editFormData.venue_id
       })
     })
     .then((res) => res.json())
-    .then(handleUpdateEvent)
-    // .then(data => console.log(data))
-
+    .then(data => console.log(data))
+    // .then(handleUpdateEvent)
+    setIsUpdate(!isUpdate)
     setEditEventId(null)
   }
   
   function handleUpdateEvent(editedEvent) {
     const updatedEvents = events.map((event) => event.id === editEventId ? editedEvent : event)
+    console.log(updatedEvents)
     setEvents(updatedEvents)
-    // setEvents(updatedEvents)
   }
 
   function handleChange(e) {
@@ -131,6 +122,7 @@ function Events({events, handleDelete, setEvents}) {
                       handleChange={handleChange}
                       editFormData={editFormData}
                       handleCancel={handleCancel}
+                      event={event}
                     />
                   ) : (
                     <ReadOnlyRow 

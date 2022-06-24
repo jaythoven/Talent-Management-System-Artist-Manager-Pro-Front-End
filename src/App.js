@@ -7,15 +7,16 @@ import Events from './Events';
 import Artists from './Artists';
 
 
-function App({selectedVenue}) {
+function App() {
   const [events, setEvents] = useState([])
   const [isDelete, setDelete] = useState(false)
+  const [isUpdate, setIsUpdate] = useState(false)
 
   useEffect(() => {
     fetch('http://localhost:9292/events')
       .then(res => res.json())
       .then((events) => setEvents(events))
-  }, [isDelete])
+  }, [isDelete, isUpdate])
 
   function handleDelete (e) {
     setDelete(!isDelete)
@@ -57,6 +58,8 @@ function App({selectedVenue}) {
                   events= {events}
                   handleDelete={handleDelete}
                   setEvents={setEvents}
+                  isUpdate={isUpdate}
+                  setIsUpdate={setIsUpdate}
                   // handleUpdateEvent={handleUpdateEvent}
                 />
               </Route>

@@ -24,24 +24,24 @@ function Artists({selectedArtist}) {
 
   return (
     <div className="artist-background">
-    <div className="cards">
-      <br></br>
-      <br></br>
-        {artists.map((artist) => 
-          <ArtistCard 
-          selectedArtist={selectedArtist}
-          key={artist.id} 
-          artist={artist}
-          handleUpdateArtist={handleUpdateArtist}
-          />
-          )}
-    </div>
-          {showForm ? <ArtistForm setArtists={setArtists}/> : null}
-          <div className="buttonContainer2">
-            <Button onClick={handleShow} variant="primary">{showForm ? "Hide Form" : "Add an Artist"}</Button>
-          </div>
-          <br></br>
+      {showForm ? <ArtistForm setArtists={setArtists}/> : null}
+      <div className="buttonContainer2">
+        <Button onClick={handleShow} variant="primary">{showForm ? "Hide Form" : "Add an Artist"}</Button>
       </div>
+        <br></br>
+      <div className="cards">
+        <br></br>
+          {artists.map((artist) => 
+            <ArtistCard 
+              selectedArtist={selectedArtist}
+              key={artist.id} 
+              artist={artist}
+              handleUpdateArtist={handleUpdateArtist}
+            />
+          )}
+      </div>
+          
+    </div>
   )
 }
 

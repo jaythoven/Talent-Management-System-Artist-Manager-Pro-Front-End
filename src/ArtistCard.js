@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import EditArtistForm from './EditArtistForm'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {useHistory} from 'react-router-dom'
@@ -12,7 +13,7 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
   const {artist_name, image, id} = artist;
   const history = useHistory();
   const [formData, setFormData] = useState(initialEventForm);
-  // const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false)
 
   function routeChange(e) {
     let path = '/events'
@@ -20,9 +21,9 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
     selectedArtist(e)
   }
   
-  // function handleShow() {
-  //   setShowForm((showForm) => !showForm);
-  // }
+  function handleShow() {
+    setShowForm((showForm) => !showForm);
+  }
 
   function handleChange(e) {
     setFormData((formData) => ({...formData, [e.target.name]: e.target.value}));
@@ -55,17 +56,17 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
             <Button 
               id={id} 
               variant="primary"
-              onClick={routeChange}
-            >
-                Show Events
+              onClick={routeChange}>Show Events
             </Button>
             <br></br>
-            <Button 
-              // id={id} 
-              variant="primary"
-              // onClick={handleShow}
-            >
-                <div className="container">
+            <Button onClick={handleShow} variant="primary" text="Show">
+              {showForm ? "Hide Form" : "Edit Artist"}
+              {showForm? <EditArtistForm 
+                formData={formData}
+                /> : null}
+            </Button>
+            {/* <br></br>
+          <div className="container">
       <form className="edit-artist-form" onSubmit={handleEdit}>
         <input
           type="text"
@@ -95,8 +96,7 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
         <br></br>
       </form>
       <br></br>
-    </div>
-            </Button>
+    </div> */}
           </Card.Body>
       </Card>
     </div>
