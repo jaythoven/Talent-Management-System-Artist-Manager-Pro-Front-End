@@ -69,11 +69,11 @@ function Events({isUpdate, setIsUpdate, events, handleDelete, setEvents}) {
     setEditEventId(null)
   }
   
-  function handleUpdateEvent(editedEvent) {
-    const updatedEvents = events.map((event) => event.id === editEventId ? editedEvent : event)
-    console.log(updatedEvents)
-    setEvents(updatedEvents)
-  }
+  // function handleUpdateEvent(editedEvent) {
+  //   const updatedEvents = events.map((event) => event.id === editEventId ? editedEvent : event)
+  //   console.log(updatedEvents)
+  //   setEvents(updatedEvents)
+  // }
 
   function handleChange(e) {
     e.preventDefault()
@@ -96,7 +96,7 @@ function Events({isUpdate, setIsUpdate, events, handleDelete, setEvents}) {
         /> : null
       }
         <div className="buttonContainer">
-          <Button onClick={handleShow} variant="primary" >Create New Event</Button>
+          <Button onClick={handleShow} variant="primary" >{showForm ? "Cancel" : "Create New Event"}</Button>
         </div>
       <br></br>
       <form onSubmit={(e) => handleEditSubmit(e)}>

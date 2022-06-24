@@ -26,10 +26,12 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
   }
 
   function handleChange(e) {
-    setFormData((formData) => ({...formData, [e.target.name]: e.target.value}));
+    setFormData((formData) => ({...formData, 
+      [e.target.name]: e.target.value}));
+      console.log(formData)
   }
 
-  function handleEdit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
     fetch(`http://localhost:9292/artists/${id}`, {
       method: "PATCH",
@@ -37,14 +39,14 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        artist_name: artist_name,
-        image: image,
+        artist_name: formData.artist_name,
+        image: formData.image,
       })
     })
     .then(r => r.json())
     .then(handleUpdateArtist)
-
     setFormData(initialEventForm)
+    handleShow()
   }
 
   return (
@@ -59,44 +61,15 @@ function ArtistCard({artist, selectedArtist, handleUpdateArtist}) {
               onClick={routeChange}>Show Events
             </Button>
             <br></br>
-            <Button onClick={handleShow} variant="primary" text="Show">
+          {showForm ? 
+            <EditArtistForm 
+              formData={formData}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+            /> : null}
+            <Button onClick={handleShow} variant="primary">
               {showForm ? "Hide Form" : "Edit Artist"}
-              {showForm? <EditArtistForm 
-                formData={formData}
-                /> : null}
             </Button>
-            {/* <br></br>
-          <div className="container">
-      <form className="edit-artist-form" onSubmit={handleEdit}>
-        <input
-          type="text"
-          name="artist_name"
-          value={formData.artist_name}
-          onChange={handleChange}
-          placeholder="Artist Name"
-          className="input-text"
-        />
-        <br></br>
-        <input
-          type="text"
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          placeholder="Image"
-          className="input-text"
-        />
-        <br />
-        <br />
-        <input
-          type="submit"
-          name="submit"
-          value="Form Submission"
-          className="submit"
-        />
-        <br></br>
-      </form>
-      <br></br>
-    </div> */}
           </Card.Body>
       </Card>
     </div>

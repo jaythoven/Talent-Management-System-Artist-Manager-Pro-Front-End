@@ -1,17 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-function EditArtistForm({formData}) {
+function EditArtistForm({handleSubmit, handleChange, formData}) {
+ 
   return (
     <div className="container">
+      <br></br>
       <form 
         className="edit-artist-form" 
-        // onSubmit={handleEdit}
+        onSubmit={handleSubmit}
       >
           <input
             type="text"
             name="artist_name"
             value={formData.artist_name}
-            // onChange={handleChange}
+            onChange={handleChange}
             placeholder="Artist Name"
             className="input-text"
           />
@@ -20,7 +22,7 @@ function EditArtistForm({formData}) {
             type="text"
             name="image"
             value={formData.image}
-            // onChange={handleChange}
+            onChange={handleChange}
             placeholder="Image"
             className="input-text"
           />
@@ -28,9 +30,7 @@ function EditArtistForm({formData}) {
           <br />
           <input
             type="submit"
-            name="submit"
-            value="Form Submission"
-            className="submit"
+            value="Submit Changes"
           />
       </form>
       <br></br>
